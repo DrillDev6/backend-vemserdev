@@ -1,50 +1,56 @@
-// src/models/Reserve.ts
-
 import { DataTypes, Model } from 'sequelize';
-import {UUIDTypes, v4 as uuidv4} from 'uuid';
-import {sequelize} from '../config/database';
-
-
-
+import { sequelize } from '../config/database';
+import Car from './Cars';
+import User from './Users';
 
 class Reserve extends Model {
-    static reserve(reserveData: { id: string, id_car: number, id_user: number, reserve_init: string, reserve_end: string  }): any {
-        throw new Error("Method not implemented");
-    }
     public id!: number;
     public id_car!: number;
     public id_user!: number;
-    public reserve_init!: string;
-    public reserve_end!: string;
-
+    public reserve_init!: Date;
+    public reserve_end!: Date;
+   
 }
 
 Reserve.init({
     id: {
-        type: DataTypes.UUID,
-        defaultValue: DataTypes.UUIDV4,
+        type: DataTypes.INTEGER,
+        autoIncrement: true,
         primaryKey: true,
-        allowNull: false,
     },
     id_car: {
         type: DataTypes.INTEGER,
         allowNull: false,
+        references: {
+            model: 'cars',
+            key: 'id'
+        }
     },
     id_user: {
         type: DataTypes.INTEGER,
         allowNull: false,
+        references: {
+            model: 'users',
+            key: 'id'
+        }
     },
     reserve_init: {
-        type: DataTypes.STRING,
+        type: DataTypes.DATE,
         allowNull: false,
     },
     reserve_end: {
-        type: DataTypes.STRING,
+        type: DataTypes.DATE,
         allowNull: false,
     }
 }, {
     sequelize,
     modelName: 'Reserve',
     tableName: 'reserves',
-    timestamps: false,
-})
+    timestamps: true,
+});
+
+// Definir associações
+Reserve.belongsTo(Car, { foreignKey: 'id_car', as: 'car' });
+Reserve.belongsTo(User, { foreignKey: 'id_user', as: 'user' });
+
+export default Reserve;
