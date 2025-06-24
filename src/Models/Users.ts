@@ -9,6 +9,7 @@ class User extends Model {
     public id!: number;
     public name!: string;
     public email!: string;
+    public password!: string;
 }
 
 User.init({
@@ -19,9 +20,16 @@ User.init({
     },
     name: {
         type: DataTypes.STRING,
+        unique: true
     },
     email: {
         type: DataTypes.STRING,
+        unique: true
+    },
+    password:{
+        type: DataTypes.STRING,
+        
+
     }
 }, {
     sequelize,

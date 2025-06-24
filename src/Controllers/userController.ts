@@ -8,9 +8,9 @@ export const createUser = async (req: Request, res: Response) => {
 };
 
 
-export const getUserById = async (req: Request, res: Response) => {
+export const getUserByName = async (req: Request, res: Response) => {
 
-    const user = await userService.getUser(parseInt(req.params.id));
+    const user = await userService.getUser(req.params.email);
     res.status(200).json(user);
 };
 

@@ -1,7 +1,7 @@
 import User from "../Models/Users"
 export class userService {
 
-    async create(userData: {name: string; email: string;}){
+    async create(userData: {name: string; email: string; password: string;}){
         const existingUser = await User.count({
             where: { email: userData.email},
         });
@@ -11,8 +11,8 @@ export class userService {
         return User.findByPk(createdUser.id);
     }
 
-    async getUser(id: number) {
-        const user = await User.findByPk(id);
+    async getUser(email: string,) {
+        const user = await User.findByPk(email);
         if (user === null) throw { status: 404, message: "User not found"};
         return user;
     }
