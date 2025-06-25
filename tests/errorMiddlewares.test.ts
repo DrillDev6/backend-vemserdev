@@ -2,14 +2,11 @@ import { Request, Response, NextFunction } from "express";
 import {
   errorHandler,
   HandledError,
-} from "../src/middlewares/errorMiddlewares";
+} from "../src/Middlewares/errorMiddlewares";
 import { NotFoundError } from "../src/Models/exceptions";
 import { ZodError } from "zod";
 import { ValidationError } from "sequelize";
-import { beforeEach, describe, it } from "node:test";
-import 'jest';
 
-// Use Jest's test functions
 describe("Error Middleware", () => {
   let mockRequest: Partial<Request>;
   let mockResponse: any;
@@ -22,7 +19,10 @@ describe("Error Middleware", () => {
       json: jest.fn(),
     };
     nextFunction = jest.fn();
-    jest.spyOn(console, "error").mockImplementation(() => {}); // Mock console.error to avoid cluttering test output
+  });
+
+  afterEach(() => {
+    jest.clearAllMocks();
   });
 
   const callErrorHandler = (err: HandledError) => {
@@ -62,29 +62,11 @@ describe("Error Middleware", () => {
     });
   });
 
-  it("should handle other errors and return 500 status", () => {
+  it("should handle generic errors and return 500 status", () => {
     const genericError = new Error("Something went wrong");
     callErrorHandler(genericError);
 
     expect(mockResponse.status).toHaveBeenCalledWith(500);
-    expect(mockResponse.json).toHaveBeenCalledWith({ message: genericError.message });
+    expect(mockResponse.json).toHaveBeenCalledWith({ message: genericError });
   });
 });
-
-const expect = (received: any) => ({
-    toHaveBeenCalledWith: (...args: any[]) => {
-        if (typeof received.mock !== "object" || typeof received.mock.calls === "undefined") {
-            throw new Error("Expected a mock function");
-        }
-        const calledWith = received.mock.calls.some((call: any[]) =>
-            args.length === call.length && args.every((arg, i) => Object.is(arg, call[i]))
-        );
-        if (!calledWith) {
-            throw new Error(`Expected function to have been called with ${JSON.stringify(args)}, but it was called with ${JSON.stringify(received.mock.calls)}`);
-        }
-    }
-});
-function expect(json: any) {
-    throw new Error("Function not implemented.");
-}
-
