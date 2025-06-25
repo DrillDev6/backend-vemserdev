@@ -1,21 +1,22 @@
 {
-    "compilerOptions": {
-        "target": "ES2020", // Define o alvo de compilação do JavaScript
-        "module": "CommonJS", // Define o sistema de módulos
-        "strict": true, // Ativa verificações estritas
-        "esModuleInterop": true, // Habilita interoperabilidade com módulos ES
-        "forceConsistentCasingInFileNames": true, // Força consistência em nomes de arquivos
-        "skipLibCheck": true, // Ignora checagem de tipos em arquivos de definição
-        "outDir": "./dist", // Diretório de saída para arquivos compilados
-        "rootDir": "./src", // Diretório raiz dos arquivos TypeScript
-        "resolveJsonModule": true, // Permite importar arquivos JSON
-        "noImplicitAny": true, // Erro para variáveis com tipo implícito "any"
-        "moduleResolution": "node", // Resolve módulos como o Node.js
-        "baseUrl": "./", // Base para resolução de caminhos relativos
-        "paths": {
-            "@/*": ["src/*"] // Alias para facilitar importações
-        }
-    },
-    "include": ["src"], // Inclui arquivos na pasta "src"
-    "exclude": ["node_modules", "dist"] // Exclui arquivos desnecessários
+  "compilerOptions": {
+    "target": "ES2020",
+    "module": "CommonJS",
+    "strict": true,
+    "esModuleInterop": true,
+    "forceConsistentCasingInFileNames": true,
+    "skipLibCheck": true,
+    "outDir": "./dist",
+    "rootDir": "./src",
+    "resolveJsonModule": true,
+    "noImplicitAny": true,
+    "moduleResolution": "node",
+    "baseUrl": "./",
+    "types": ["jest", "node"],
+    "paths": {
+      "@/*": ["src/*"]
+    }
+  },
+  "include": ["src", "tests"],
+  "exclude": ["node_modules", "dist"]
 }
