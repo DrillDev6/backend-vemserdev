@@ -1,26 +1,44 @@
 import {Request, Response} from "express";
 import carServices from "../Services/carService";
 
+export class CarController {
+    carServices = carServices;
 
-export const registryCar = async (req: Request, res: Response) => {
-    const user = await carServices.registry(req.body);
-    res.status(201).json(user);
-};
+    async registryCar(req: Request, res: Response) {
+        try {
+            const user = await this.carServices.registry(req.body);
+            res.status(201).json(user);
+        } catch (error: any) {
+            res.status(error.status || 500).json({ message: error.message || 'Erro interno' });
+        }
+    }
 
+    async getCarById(req: Request, res: Response) {
+        try {
+            const car = await this.carServices.getCars(parseInt(req.params.id));
+            res.status(200).json(car);
+        } catch (error: any) {
+            res.status(error.status || 500).json({ message: error.message || 'Erro interno' });
+        }
+    }
 
-export const getCarById = async (req: Request, res: Response) => {
+    async updateCar(req: Request, res: Response) {
+        try {
+            await this.carServices.update(parseInt(req.params.id), req.body);
+            res.status(204).json();
+        } catch (error: any) {
+            res.status(error.status || 500).json({ message: error.message || 'Erro interno' });
+        }
+    }
 
-    const car = await carServices.getCars(parseInt(req.params.id));
-    res.status(200).json(car);
-};
+    async deleteCar(req: Request, res: Response) {
+        try {
+            await this.carServices.delete(parseInt(req.params.id));
+            res.status(204).send();
+        } catch (error: any) {
+            res.status(error.status || 500).json({ message: error.message || 'Erro interno' });
+        }
+    }
+}
 
-export const updateCar = async (req: Request, res: Response) => {
-    await carServices.update(parseInt(req.params.id), req.body);
-    res.status(204).json()
-}; 
-
-
-export const deleteCar = async (req: Request, res: Response) => {
-    await carServices.delete(parseInt(req.params.id));
-    res.status(204).send();
-};
+export default new CarController();

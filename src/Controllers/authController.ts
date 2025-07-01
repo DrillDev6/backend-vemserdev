@@ -55,10 +55,12 @@ export class AuthController {
    *       400:
    *         description: Credenciais inválidas
    */
+  authService = authService;
+
   async login(req: Request, res: Response) {
     try {
       const { email, password } = req.body;
-      const result = await authService.login(email, password);
+      const result = await this.authService.login(email, password);
       res.status(200).json(result);
     } catch (error: any) {
       res.status(error.status || 400).json({
@@ -102,7 +104,7 @@ export class AuthController {
         });
       }
 
-      const result = await authService.refreshToken(refreshToken);
+      const result = await this.authService.refreshToken(refreshToken);
       res.status(200).json(result);
     } catch (error: any) {
       res.status(error.status || 400).json({
@@ -137,7 +139,7 @@ export class AuthController {
         });
       }
 
-      const result = await authService.logout(token);
+      const result = await this.authService.logout(token);
       res.status(200).json({
         success: true,
         ...result
@@ -175,7 +177,7 @@ export class AuthController {
         });
       }
 
-      const result = await authService.logoutAll(userId);
+      const result = await this.authService.logoutAll(userId);
       res.status(200).json({
         success: true,
         ...result
@@ -223,7 +225,7 @@ export class AuthController {
         });
       }
 
-      const result = await authService.requestPasswordReset(email);
+      const result = await this.authService.requestPasswordReset(email);
       res.status(200).json({
         success: true,
         ...result
@@ -281,7 +283,7 @@ export class AuthController {
         });
       }
 
-      const result = await authService.resetPassword(token, newPassword);
+      const result = await this.authService.resetPassword(token, newPassword);
       res.status(200).json({
         success: true,
         ...result
