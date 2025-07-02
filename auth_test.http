@@ -1,0 +1,36 @@
+### Criar Usuário
+POST http://localhost:3000/users
+Content-Type: application/json
+
+{
+  "name": "Teste Usuário",
+  "email": "testeuser@email.com",
+  "password": "123456",
+  "role": "user"
+}
+
+### Login Usuário
+POST http://localhost:3000/auth/login
+Content-Type: application/json
+
+{
+  "email": "testeuser@email.com",
+  "password": "123456"
+}
+
+### Solicitar Reset de Senha
+POST http://localhost:3000/auth/reset-password-request
+Content-Type: application/json
+
+{
+  "email": "testeuser@email.com"
+}
+
+### Resetar Senha
+POST http://localhost:3000/auth/reset-password
+Content-Type: application/json
+
+{
+  "token": "{{resetToken}}",
+  "password": "novaSenha123"
+}

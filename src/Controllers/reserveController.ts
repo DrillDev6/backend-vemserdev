@@ -4,7 +4,7 @@ import reserveService from "../Services/reserveService";
 export class ReserveController {
     reserveService = reserveService;
 
-    async createReserve(req: Request, res: Response) {
+    async createReserve(req: Request, res: Response): Promise<void> {
         try {
             const reserve = await this.reserveService.create(req.body);
             res.status(201).json({
@@ -20,7 +20,7 @@ export class ReserveController {
         }
     }
 
-    async getReserveById(req: Request, res: Response) {
+    async getReserveById(req: Request, res: Response): Promise<void> {
         try {
             const reserve = await this.reserveService.getReserve(req.params.id);
             res.status(200).json({
@@ -35,7 +35,7 @@ export class ReserveController {
         }
     }
 
-    async getAllReserves(req: Request, res: Response) {
+    async getAllReserves(req: Request, res: Response): Promise<void> {
         try {
             const reserves = await this.reserveService.getAllReserves();
             res.status(200).json({
@@ -51,7 +51,7 @@ export class ReserveController {
         }
     }
 
-    async getReservesByUser(req: Request, res: Response) {
+    async getReservesByUser(req: Request, res: Response): Promise<void> {
         try {
             const reserves = await this.reserveService.getReservesByUser(parseInt(req.params.userId));
             res.status(200).json({
@@ -67,7 +67,7 @@ export class ReserveController {
         }
     }
 
-    async getReservesByCar(req: Request, res: Response) {
+    async getReservesByCar(req: Request, res: Response): Promise<void> {
         try {
             const reserves = await this.reserveService.getReservesByCar(parseInt(req.params.carId));
             res.status(200).json({
@@ -83,7 +83,7 @@ export class ReserveController {
         }
     }
 
-    async updateReserve(req: Request, res: Response) {
+    async updateReserve(req: Request, res: Response): Promise<void> {
         try {
             await this.reserveService.update(req.params.id, req.body);
             res.status(204).send();
@@ -95,7 +95,7 @@ export class ReserveController {
         }
     }
 
-    async deleteReserve(req: Request, res: Response) {
+    async deleteReserve(req: Request, res: Response): Promise<void> {
         try {
             await this.reserveService.delete(req.params.id);
             res.status(204).send();

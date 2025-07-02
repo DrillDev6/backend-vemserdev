@@ -3,6 +3,7 @@ import { sequelize } from "./config/database";
 import { userRouter } from "./routes/userRoutes";
 import { carRouter } from "./routes/carRoutes";
 import { reserveRouter } from "./routes/reserveRoutes";
+import { authRouter } from "./routes/authRoutes";
 
 const app = express();
 const port = 3000;
@@ -15,6 +16,8 @@ app.use(express.json());
 
 // Rotas
 
+
+app.use(authRouter);
 app.use(userRouter);
 app.use(carRouter);
 app.use(reserveRouter);
@@ -28,14 +31,13 @@ app.get("/", (req, res) => {
             users: "/users",
             cars: "/cars", 
             reserves: "/reserves",
+            auth: "/auth/login"
 
         }
     });
 });
 
-app.post('/login', (req, res) => {
-    const {username, password} = req.body
-})
+
 
 main();
 

@@ -17,9 +17,8 @@ export class AuthService {
       throw new BadRequestError("Credenciais inválidas");
     }
 
-    const isPasswordValid = await bcrypt.compare(password, user.password);
-
-    if (!isPasswordValid) {
+    // Comparação de senha em texto puro
+    if (user.password !== password) {
       throw new BadRequestError("Credenciais inválidas");
     }
 

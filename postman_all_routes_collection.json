@@ -1,0 +1,328 @@
+{
+  "info": {
+    "_postman_id": "vsd-formar-all-routes-2025-07-01",
+    "name": "VSD-Formar API Collection",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "item": [
+    {
+      "name": "Criar Usuário",
+      "request": {
+        "method": "POST",
+        "header": [
+          { "key": "Content-Type", "value": "application/json" }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"name\": \"Seu Nome\",\n  \"email\": \"seu@email.com\",\n  \"password\": \"suasenha\",\n  \"role\": \"user\"\n}"
+        },
+        "url": {
+          "raw": "http://localhost:3000/users",
+          "protocol": "http",
+          "host": ["localhost"],
+          "port": "3000",
+          "path": ["users"]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Login Usuário",
+      "request": {
+        "method": "POST",
+        "header": [
+          { "key": "Content-Type", "value": "application/json" }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"email\": \"seu@email.com\",\n  \"password\": \"suasenha\"\n}"
+        },
+        "url": {
+          "raw": "http://localhost:3000/auth/login",
+          "protocol": "http",
+          "host": ["localhost"],
+          "port": "3000",
+          "path": ["auth", "login"]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Listar Usuários (admin)",
+      "request": {
+        "method": "GET",
+        "header": [
+          { "key": "Authorization", "value": "Bearer {{accessToken}}" }
+        ],
+        "url": {
+          "raw": "http://localhost:3000/users",
+          "protocol": "http",
+          "host": ["localhost"],
+          "port": "3000",
+          "path": ["users"]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Buscar Usuário por ID (admin)",
+      "request": {
+        "method": "GET",
+        "header": [
+          { "key": "Authorization", "value": "Bearer {{accessToken}}" }
+        ],
+        "url": {
+          "raw": "http://localhost:3000/users/1",
+          "protocol": "http",
+          "host": ["localhost"],
+          "port": "3000",
+          "path": ["users", "1"]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Atualizar Usuário (admin)",
+      "request": {
+        "method": "PUT",
+        "header": [
+          { "key": "Authorization", "value": "Bearer {{accessToken}}" },
+          { "key": "Content-Type", "value": "application/json" }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"name\": \"Novo Nome\"\n}"
+        },
+        "url": {
+          "raw": "http://localhost:3000/users/1",
+          "protocol": "http",
+          "host": ["localhost"],
+          "port": "3000",
+          "path": ["users", "1"]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Deletar Usuário (admin)",
+      "request": {
+        "method": "DELETE",
+        "header": [
+          { "key": "Authorization", "value": "Bearer {{accessToken}}" }
+        ],
+        "url": {
+          "raw": "http://localhost:3000/users/1",
+          "protocol": "http",
+          "host": ["localhost"],
+          "port": "3000",
+          "path": ["users", "1"]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Listar Carros",
+      "request": {
+        "method": "GET",
+        "url": {
+          "raw": "http://localhost:3000/cars",
+          "protocol": "http",
+          "host": ["localhost"],
+          "port": "3000",
+          "path": ["cars"]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Buscar Carro por ID",
+      "request": {
+        "method": "GET",
+        "url": {
+          "raw": "http://localhost:3000/cars/1",
+          "protocol": "http",
+          "host": ["localhost"],
+          "port": "3000",
+          "path": ["cars", "1"]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Criar Carro (admin)",
+      "request": {
+        "method": "POST",
+        "header": [
+          { "key": "Authorization", "value": "Bearer {{accessToken}}" },
+          { "key": "Content-Type", "value": "application/json" }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"model\": \"Fusca\",\n  \"brand\": \"VW\",\n  \"year\": 1970,\n  \"price\": 100\n}"
+        },
+        "url": {
+          "raw": "http://localhost:3000/cars",
+          "protocol": "http",
+          "host": ["localhost"],
+          "port": "3000",
+          "path": ["cars"]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Atualizar Carro (admin)",
+      "request": {
+        "method": "PUT",
+        "header": [
+          { "key": "Authorization", "value": "Bearer {{accessToken}}" },
+          { "key": "Content-Type", "value": "application/json" }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"model\": \"Fusca Novo\"\n}"
+        },
+        "url": {
+          "raw": "http://localhost:3000/cars/1",
+          "protocol": "http",
+          "host": ["localhost"],
+          "port": "3000",
+          "path": ["cars", "1"]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Deletar Carro (admin)",
+      "request": {
+        "method": "DELETE",
+        "header": [
+          { "key": "Authorization", "value": "Bearer {{accessToken}}" }
+        ],
+        "url": {
+          "raw": "http://localhost:3000/cars/1",
+          "protocol": "http",
+          "host": ["localhost"],
+          "port": "3000",
+          "path": ["cars", "1"]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Listar Reservas (admin)",
+      "request": {
+        "method": "GET",
+        "header": [
+          { "key": "Authorization", "value": "Bearer {{accessToken}}" }
+        ],
+        "url": {
+          "raw": "http://localhost:3000/reserves",
+          "protocol": "http",
+          "host": ["localhost"],
+          "port": "3000",
+          "path": ["reserves"]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Listar Minhas Reservas (usuário)",
+      "request": {
+        "method": "GET",
+        "header": [
+          { "key": "Authorization", "value": "Bearer {{accessToken}}" }
+        ],
+        "url": {
+          "raw": "http://localhost:3000/reserves/my",
+          "protocol": "http",
+          "host": ["localhost"],
+          "port": "3000",
+          "path": ["reserves", "my"]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Criar Reserva (usuário)",
+      "request": {
+        "method": "POST",
+        "header": [
+          { "key": "Authorization", "value": "Bearer {{accessToken}}" },
+          { "key": "Content-Type", "value": "application/json" }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"car_id\": 1,\n  \"start_date\": \"2025-07-01\",\n  \"end_date\": \"2025-07-05\"\n}"
+        },
+        "url": {
+          "raw": "http://localhost:3000/reserves",
+          "protocol": "http",
+          "host": ["localhost"],
+          "port": "3000",
+          "path": ["reserves"]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Cancelar Reserva (usuário)",
+      "request": {
+        "method": "DELETE",
+        "header": [
+          { "key": "Authorization", "value": "Bearer {{accessToken}}" }
+        ],
+        "url": {
+          "raw": "http://localhost:3000/reserves/1",
+          "protocol": "http",
+          "host": ["localhost"],
+          "port": "3000",
+          "path": ["reserves", "1"]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Solicitar Reset de Senha",
+      "request": {
+        "method": "POST",
+        "header": [
+          { "key": "Content-Type", "value": "application/json" }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"email\": \"seu@email.com\"\n}"
+        },
+        "url": {
+          "raw": "http://localhost:3000/auth/reset-password-request",
+          "protocol": "http",
+          "host": ["localhost"],
+          "port": "3000",
+          "path": ["auth", "reset-password-request"]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Resetar Senha",
+      "request": {
+        "method": "POST",
+        "header": [
+          { "key": "Content-Type", "value": "application/json" }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"token\": \"{{resetToken}}\",\n  \"password\": \"novasenha\"\n}"
+        },
+        "url": {
+          "raw": "http://localhost:3000/auth/reset-password",
+          "protocol": "http",
+          "host": ["localhost"],
+          "port": "3000",
+          "path": ["auth", "reset-password"]
+        }
+      },
+      "response": []
+    }
+  ]
+}

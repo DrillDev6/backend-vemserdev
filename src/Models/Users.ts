@@ -5,12 +5,15 @@ import {sequelize} from '../config/database';
 
 
 
+
 class User extends Model {
     public id!: number;
     public name!: string;
     public email!: string;
     public password!: string;
+    public role!: 'user' | 'admin';
 }
+
 
 User.init({
     id: {
@@ -26,10 +29,13 @@ User.init({
         type: DataTypes.STRING,
         unique: true
     },
-    password:{
+    password: {
         type: DataTypes.STRING,
-        
-
+    },
+    role: {
+        type: DataTypes.ENUM('user', 'admin'),
+        allowNull: false,
+        defaultValue: 'user',
     }
 }, {
     sequelize,

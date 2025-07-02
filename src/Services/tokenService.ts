@@ -38,19 +38,30 @@ export class TokenService {
         const accessTokenExpiry = new Date(Date.now() + 24 * 60 * 60 * 1000); // 24h
         const refreshTokenExpiry = new Date(Date.now() + 30 * 24 * 60 * 60 * 1000); // 30 dias
 
-        await Token.create({
-            user_id: userId,
-            token: accessToken,
-            type: TokenType.ACCESS,
-            expires_at: accessTokenExpiry
-        });
 
-        await Token.create({
-            user_id: userId,
-            token: refreshToken,
-            type: TokenType.REFRESH,
-            expires_at: refreshTokenExpiry
-        });
+        try {
+            const createdAccess = await Token.create({
+                user_id: userId,
+                token: accessToken,
+                type: TokenType.ACCESS,
+                expires_at: accessTokenExpiry
+            });
+            console.log("Token ACCESS criado:", createdAccess?.id);
+        } catch (err) {
+            console.error("Erro ao criar token ACCESS:", err);
+        }
+
+        try {
+            const createdRefresh = await Token.create({
+                user_id: userId,
+                token: refreshToken,
+                type: TokenType.REFRESH,
+                expires_at: refreshTokenExpiry
+            });
+            console.log("Token REFRESH criado:", createdRefresh?.id);
+        } catch (err) {
+            console.error("Erro ao criar token REFRESH:", err);
+        }
 
         return {
             accessToken,

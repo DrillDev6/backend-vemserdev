@@ -1,10 +1,10 @@
-import {Request, Response} from "express";
+import {Request, Response, NextFunction} from "express";
 import carServices from "../Services/carService";
 
 export class CarController {
     carServices = carServices;
 
-    async registryCar(req: Request, res: Response) {
+    async registryCar(req: Request, res: Response, next: NextFunction) {
         try {
             const user = await this.carServices.registry(req.body);
             res.status(201).json(user);
@@ -13,7 +13,7 @@ export class CarController {
         }
     }
 
-    async getCarById(req: Request, res: Response) {
+    async getCarById(req: Request, res: Response, next: NextFunction) {
         try {
             const car = await this.carServices.getCars(parseInt(req.params.id));
             res.status(200).json(car);
@@ -22,7 +22,7 @@ export class CarController {
         }
     }
 
-    async updateCar(req: Request, res: Response) {
+    async updateCar(req: Request, res: Response, next: NextFunction) {
         try {
             await this.carServices.update(parseInt(req.params.id), req.body);
             res.status(204).json();
@@ -31,7 +31,7 @@ export class CarController {
         }
     }
 
-    async deleteCar(req: Request, res: Response) {
+    async deleteCar(req: Request, res: Response, next: NextFunction) {
         try {
             await this.carServices.delete(parseInt(req.params.id));
             res.status(204).send();

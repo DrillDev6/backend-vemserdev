@@ -57,7 +57,7 @@ export class AuthController {
    */
   authService = authService;
 
-  async login(req: Request, res: Response) {
+  async login(req: Request, res: Response): Promise<void> {
     try {
       const { email, password } = req.body;
       const result = await this.authService.login(email, password);
@@ -93,15 +93,16 @@ export class AuthController {
    *       400:
    *         description: Refresh token inválido
    */
-  async refreshToken(req: Request, res: Response) {
+  async refreshToken(req: Request, res: Response): Promise<void> {
     try {
       const { refreshToken } = req.body;
       
       if (!refreshToken) {
-        return res.status(400).json({
+        res.status(400).json({
           success: false,
           message: "Refresh token é obrigatório"
         });
+        return;
       }
 
       const result = await this.authService.refreshToken(refreshToken);
@@ -128,15 +129,16 @@ export class AuthController {
    *       401:
    *         description: Token inválido
    */
-  async logout(req: Request, res: Response) {
+  async logout(req: Request, res: Response): Promise<void> {
     try {
       const token = req.headers.authorization?.split(" ")[1];
       
       if (!token) {
-        return res.status(401).json({
+        res.status(401).json({
           success: false,
           message: "Token não fornecido"
         });
+        return;
       }
 
       const result = await this.authService.logout(token);
@@ -166,15 +168,16 @@ export class AuthController {
    *       401:
    *         description: Token inválido
    */
-  async logoutAll(req: Request, res: Response) {
+  async logoutAll(req: Request, res: Response): Promise<void> {
     try {
       const userId = (req as any).userId; // Vem do middleware de autenticação
       
       if (!userId) {
-        return res.status(401).json({
+        res.status(401).json({
           success: false,
           message: "Usuário não autenticado"
         });
+        return;
       }
 
       const result = await this.authService.logoutAll(userId);
@@ -214,15 +217,16 @@ export class AuthController {
    *       404:
    *         description: Usuário não encontrado
    */
-  async forgotPassword(req: Request, res: Response) {
+  async forgotPassword(req: Request, res: Response): Promise<void> {
     try {
       const { email } = req.body;
       
       if (!email) {
-        return res.status(400).json({
+        res.status(400).json({
           success: false,
           message: "Email é obrigatório"
         });
+        return;
       }
 
       const result = await this.authService.requestPasswordReset(email);
@@ -265,22 +269,24 @@ export class AuthController {
    *       400:
    *         description: Token inválido ou dados incorretos
    */
-  async resetPassword(req: Request, res: Response) {
+  async resetPassword(req: Request, res: Response): Promise<void> {
     try {
       const { token, newPassword } = req.body;
       
       if (!token || !newPassword) {
-        return res.status(400).json({
+        res.status(400).json({
           success: false,
           message: "Token e nova senha são obrigatórios"
         });
+        return;
       }
 
       if (newPassword.length < 6) {
-        return res.status(400).json({
+        res.status(400).json({
           success: false,
           message: "A senha deve ter pelo menos 6 caracteres"
         });
+        return;
       }
 
       const result = await this.authService.resetPassword(token, newPassword);

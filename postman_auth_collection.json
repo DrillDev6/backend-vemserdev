@@ -1,0 +1,51 @@
+{
+  "info": {
+    "_postman_id": "c6e1e1b2-1234-4bcd-9a1a-abcdef123456",
+    "name": "VSD-Formar Auth Collection",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "item": [
+    {
+      "name": "Criar Usuário",
+      "request": {
+        "method": "POST",
+        "header": [
+          { "key": "Content-Type", "value": "application/json" }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"name\": \"Seu Nome\",\n  \"email\": \"seu@email.com\",\n  \"password\": \"suasenha\",\n  \"role\": \"user\"\n}"
+        },
+        "url": {
+          "raw": "http://localhost:3000/users",
+          "protocol": "http",
+          "host": ["localhost"],
+          "port": "3000",
+          "path": ["users"]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Login Usuário",
+      "request": {
+        "method": "POST",
+        "header": [
+          { "key": "Content-Type", "value": "application/json" }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"email\": \"seu@email.com\",\n  \"password\": \"suasenha\"\n}"
+        },
+        "url": {
+          "raw": "http://localhost:3000/auth/login",
+          "protocol": "http",
+          "host": ["localhost"],
+          "port": "3000",
+          "path": ["auth", "login"]
+        }
+      },
+      "response": []
+    }
+  ]
+}
